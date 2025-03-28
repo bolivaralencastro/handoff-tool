@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handoff Tool - Banner</title>
+    <link rel="stylesheet" href="tool/panel.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qvhmoabrlg");
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Protótipo -->
+        <iframe src="prototype/index.html" id="prototype-frame"></iframe>
+        
+        <!-- Painel de Documentação -->
+        <div id="docs-panel">
+            <div class="panel-header">
+                <h2>Documentação</h2>
+                <div class="controls" style="display: none;">
+                    <select id="section-selector">
+                       
+                    </select>
+                </div>
+            </div>
+            <div id="rules-container"></div>
+        </div>
+
+        <!-- Botão de Toggle (fora do painel) -->
+        <button id="toggle-panel" class="toggle-button">
+            <span class="material-icons">chevron_left</span>
+        </button>
+    </div>
+
+    <script src="tool/panel.js"></script>
+</body>
+</html> 

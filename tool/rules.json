@@ -1,0 +1,567 @@
+[
+    {
+        "section": "settingsButton",
+        "title": "Botão de Configurações",
+        "description": "Botão circular no canto superior direito",
+        "acceptance_criteria": [
+            "Botão deve ter ícone 'settings'",
+            "Posicionamento fixo no canto superior direito",
+            "Fundo semi-transparente",
+            "Efeito de hover com opacidade aumentada"
+        ],
+        "technical_notes": "Usar position: absolute com top: 1rem e right: 1rem. Background com rgba(255, 255, 255, 0.2)."
+    },
+    {
+        "section": "config-dialog",
+        "title": "Tela Inicial de Configurações",
+        "description": "Primeira tela exibida ao abrir as configurações do banner, permitindo escolher entre modo automático e manual",
+        "acceptance_criteria": [
+            "Toggle deve alternar entre modo automático e manual",
+            "No modo manual, exibir campos para adicionar até 3 itens",
+            "Validar datas (fim > início) antes de permitir publicação",
+            "Suporte a drag and drop para reordenação dos itens"
+        ],
+        "technical_notes": "Implementar validação de datas e limite de 3 itens. Usar biblioteca de drag and drop para reordenação.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário clica no botão de settings",
+                "2. Sistema abre o diálogo de configuração",
+                "3. Usuário alterna para modo Manual",
+                "4. Sistema exibe campos de configuração",
+                "5. Usuário adiciona e reordena itens",
+                "6. Sistema valida e salva configurações"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Visão Geral",
+                "description": "Esta é a tela inicial de configurações do banner, sempre exibida quando o modo manual não está ativo",
+                "details": [
+                    "É a primeira etapa do processo de configuração",
+                    "Aparece ao clicar no ícone de engrenagem",
+                    "Permite escolher entre modo automático e manual",
+                    "Serve como ponto de entrada para todas as configurações"
+                ]
+            },
+            {
+                "title": "Modo Automático",
+                "description": "Configuração padrão do banner, onde o conteúdo é personalizado via IA",
+                "details": [
+                    "É o modo padrão do banner",
+                    "Cada usuário recebe conteúdo personalizado",
+                    "Usa IA para selecionar o conteúdo mais relevante",
+                    "Não requer intervenção manual"
+                ]
+            },
+            {
+                "title": "Modo Manual",
+                "description": "Permite controle total sobre o conteúdo exibido no banner",
+                "details": [
+                    "Acesso através do toggle na tela inicial",
+                    "Permite selecionar conteúdo específico",
+                    "Oferece mais controle sobre datas e ordem",
+                    "Requer configuração manual dos itens"
+                ]
+            },
+            {
+                "title": "Navegação",
+                "description": "Como interagir com a tela inicial",
+                "details": [
+                    "Toggle para alternar entre modos",
+                    "Botão de fechar para sair das configurações",
+                    "Descrição clara do modo atual",
+                    "Feedback visual do estado do toggle"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "search-input",
+        "title": "Campo de Busca",
+        "description": "Campo para buscar e adicionar conteúdo ao banner",
+        "acceptance_criteria": [
+            "Campo deve aceitar texto livre",
+            "Suporte a busca por título ou ID",
+            "Desabilitado quando limite de 3 itens é atingido",
+            "Feedback visual quando desabilitado"
+        ],
+        "technical_notes": "Implementar validação de entrada e estados do campo. Usar disabled state quando limite atingido.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário clica no campo",
+                "2. Sistema mostra regras de busca",
+                "3. Usuário digita termo de busca",
+                "4. Sistema valida e mostra resultados"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Funcionalidades Gerais",
+                "description": "Capacidades básicas do campo de busca",
+                "details": [
+                    "Aceita busca por título ou ID de conteúdo",
+                    "Suporta busca parcial (digite parte do título)",
+                    "Máximo de 3 itens podem ser adicionados",
+                    "Campo é desabilitado quando o limite é atingido",
+                    "Feedback visual quando desabilitado",
+                    "Suporte a URLs internas e externas"
+                ]
+            },
+            {
+                "title": "Navegação",
+                "description": "Como interagir com o campo",
+                "details": [
+                    "Tecla Enter para adicionar URL externa",
+                    "Tecla Escape para fechar dropdowns",
+                    "Clique fora fecha dropdowns automaticamente",
+                    "Suporte a navegação por teclado",
+                    "Foco automático ao abrir diálogo",
+                    "Feedback visual ao digitar"
+                ]
+            },
+            {
+                "title": "Validações",
+                "description": "Regras de validação do campo",
+                "details": [
+                    "Não aceita campo vazio",
+                    "Valida formato de URL",
+                    "Reconhece links internos do sistema",
+                    "Limite de caracteres: 255",
+                    "Suporte a caracteres especiais",
+                    "Tratamento de espaços extras"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "search-results",
+        "title": "Resultados da Busca",
+        "description": "Lista de resultados para trilhas, cursos e eventos",
+        "acceptance_criteria": [
+            "Máximo de 10 resultados por vez",
+            "Agrupamento por tipo de conteúdo",
+            "Ícones específicos por tipo",
+            "Scroll com altura máxima de 300px"
+        ],
+        "technical_notes": "Implementar scroll com max-height: 300px e overflow-y: auto. Usar ícones do Material Icons.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário digita no campo de busca",
+                "2. Sistema mostra resultados agrupados",
+                "3. Usuário seleciona um item",
+                "4. Sistema adiciona à lista de itens"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Exibição de Resultados",
+                "description": "Como os resultados são apresentados",
+                "details": [
+                    "Máximo de 10 resultados por vez",
+                    "Agrupados por tipo (trilhas, cursos, eventos)",
+                    "Ícone específico para cada tipo de conteúdo",
+                    "Altura máxima de 300px com scroll",
+                    "Feedback visual ao passar o mouse",
+                    "Indicador de carregamento durante busca"
+                ]
+            },
+            {
+                "title": "Tipos de Conteúdo",
+                "description": "Diferentes tipos de conteúdo suportados",
+                "details": [
+                    "Trilhas: ícone de rota (alt_route)",
+                    "Cursos: ícone de foguete (rocket_launch)",
+                    "Eventos: ícone de calendário (calendar_month)",
+                    "Links externos: ícone de link (link)",
+                    "Cores específicas por tipo",
+                    "Tooltip com descrição do tipo"
+                ]
+            },
+            {
+                "title": "Limitações",
+                "description": "Restrições da busca",
+                "details": [
+                    "Busca por título ou ID do conteúdo",
+                    "Suporte a busca parcial",
+                    "Resultados ordenados por relevância",
+                    "Máximo de 3 itens podem ser selecionados",
+                    "Timeout de 5 segundos por busca",
+                    "Cache de resultados recentes"
+                ]
+            },
+            {
+                "title": "Interação",
+                "description": "Como interagir com os resultados",
+                "details": [
+                    "Clique para selecionar item",
+                    "Duplo clique para adicionar",
+                    "Tecla Enter para selecionar",
+                    "Tecla Escape para fechar",
+                    "Scroll suave na lista",
+                    "Feedback visual na seleção"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "external-url",
+        "title": "Configuração de Link Externo",
+        "description": "Formulário para adicionar links externos",
+        "acceptance_criteria": [
+            "Título e URL obrigatórios",
+            "Validação de URL",
+            "Upload de imagem obrigatório",
+            "Datas de ativação/desativação"
+        ],
+        "technical_notes": "Implementar validação de URL e datas. Manter proporção 16:9 para imagens.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário cola URL externa",
+                "2. Sistema mostra formulário",
+                "3. Usuário preenche detalhes",
+                "4. Sistema valida e adiciona"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Campos Obrigatórios",
+                "description": "Informações necessárias para links externos",
+                "details": [
+                    "Título do link (obrigatório)",
+                    "URL válida (obrigatória)",
+                    "Imagem de capa (obrigatória)",
+                    "Datas de ativação/desativação",
+                    "Mínimo de 3 caracteres no título",
+                    "URL deve ser acessível"
+                ]
+            },
+            {
+                "title": "Validações",
+                "description": "Regras de validação para links externos",
+                "details": [
+                    "URL deve ser válida e acessível",
+                    "Imagem deve ter proporção 16:9",
+                    "Formatos de imagem: .jpg, .png, .webp",
+                    "Tamanho máximo de imagem: 2MB",
+                    "Datas devem ser futuras",
+                    "Data fim deve ser posterior à início"
+                ]
+            },
+            {
+                "title": "Processo de Adição",
+                "description": "Como adicionar um link externo",
+                "details": [
+                    "Cole a URL no campo de busca",
+                    "Preencha o título do link",
+                    "Faça upload da imagem de capa",
+                    "Confirme a adição",
+                    "Preview da imagem antes de confirmar",
+                    "Feedback de sucesso após adição"
+                ]
+            },
+            {
+                "title": "Tratamento de Erros",
+                "description": "Como lidar com erros no processo",
+                "details": [
+                    "URL inválida ou inacessível",
+                    "Imagem com formato incorreto",
+                    "Imagem com tamanho excedido",
+                    "Datas inválidas",
+                    "Título muito curto",
+                    "Erro no upload da imagem"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "items-list",
+        "title": "Lista de Itens Adicionados",
+        "description": "Lista que mostra os itens selecionados para o banner",
+        "acceptance_criteria": [
+            "Máximo de 3 itens",
+            "Suporte a drag and drop para reordenação",
+            "Cada item deve ter botão de remoção",
+            "Feedback visual durante o drag"
+        ],
+        "technical_notes": "Implementar drag and drop com feedback visual (opacity: 0.5 durante o drag).",
+        "rules": [
+            {
+                "title": "Gerenciamento de Itens",
+                "description": "Funcionalidades da lista de itens",
+                "details": [
+                    "Exibe todos os itens adicionados ao banner",
+                    "Permite reordenar itens via drag and drop",
+                    "Permite remover itens individualmente",
+                    "Mostra ícone específico para cada tipo de item"
+                ]
+            },
+            {
+                "title": "Ordenação",
+                "description": "Regras para ordenação dos itens",
+                "details": [
+                    "Itens podem ser reordenados arrastando",
+                    "A ordem define a sequência no banner",
+                    "Alterações na ordem são marcadas como não salvas",
+                    "Visual feedback durante o arrasto"
+                ]
+            },
+            {
+                "title": "Remoção",
+                "description": "Regras para remoção de itens",
+                "details": [
+                    "Cada item tem botão de remoção",
+                    "Remoção requer confirmação visual",
+                    "Item é removido imediatamente após confirmação",
+                    "Lista é atualizada automaticamente"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "confirm-dialog",
+        "title": "Diálogo de Confirmação",
+        "description": "Modal para confirmar descarte de alterações não salvas",
+        "acceptance_criteria": [
+            "Exibir apenas quando houver alterações não salvas",
+            "Opções de continuar ou descartar",
+            "Fundo com overlay escuro",
+            "Centralizado na tela"
+        ],
+        "technical_notes": "Usar position: fixed com overlay escuro (rgba(0, 0, 0, 0.5)).",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário faz alterações (adiciona itens, muda datas, etc)",
+                "2. Usuário clica em Cancelar",
+                "3. Sistema verifica se há alterações não salvas",
+                "4. Se houver alterações, mostra diálogo de confirmação",
+                "5. Se não houver alterações, fecha diretamente"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Condições de Exibição",
+                "description": "Quando o diálogo deve aparecer",
+                "details": [
+                    "Apenas quando houver alterações não salvas",
+                    "Não aparece ao abrir e fechar sem mudanças",
+                    "Aparece após adicionar itens",
+                    "Aparece após alterar datas",
+                    "Aparece após reordenar itens",
+                    "Aparece após qualquer mudança não publicada"
+                ]
+            },
+            {
+                "title": "Comportamento",
+                "description": "Como o diálogo funciona",
+                "details": [
+                    "Fechamento direto se não houver alterações",
+                    "Confirmação necessária se houver alterações",
+                    "Reset do estado após fechar",
+                    "Volta ao modo automático se cancelar",
+                    "Mantém alterações se continuar editando",
+                    "Feedback visual claro das opções"
+                ]
+            },
+            {
+                "title": "Estados",
+                "description": "Diferentes estados do diálogo",
+                "details": [
+                    "Estado inicial: modo automático",
+                    "Estado com alterações: modo manual",
+                    "Estado de confirmação: diálogo aberto",
+                    "Estado após cancelamento: volta ao automático",
+                    "Estado após continuar: mantém manual",
+                    "Estado após publicar: volta ao automático"
+                ]
+            },
+            {
+                "title": "Cancelamento sem Alterações",
+                "description": "Comportamento ao cancelar sem fazer mudanças",
+                "details": [
+                    "Diálogo fecha diretamente sem confirmação",
+                    "Volta ao estado inicial (modo automático)",
+                    "Não mostra diálogo de confirmação",
+                    "Não exibe mensagens de feedback",
+                    "Mantém configurações padrão",
+                    "Pronto para nova interação"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "publish-button",
+        "title": "Botão de Publicação",
+        "description": "Botão para salvar e publicar as alterações",
+        "acceptance_criteria": [
+            "Desabilitado quando não há alterações",
+            "Feedback visual durante o processo de publicação",
+            "Mensagem de sucesso após publicação",
+            "Fechar diálogo após sucesso"
+        ],
+        "technical_notes": "Implementar estados: disabled (background: #ccc), loading (background: #7C4DFF), success (background: #4CAF50)."
+    },
+    {
+        "section": "snackbars",
+        "title": "Mensagens de Feedback",
+        "description": "Snackbars para exibir feedback ao usuário",
+        "messages": [
+            {
+                "id": "limit-slides",
+                "text": "Por favor, insira um termo de busca ou URL",
+                "type": "error",
+                "trigger": "Tentativa de adicionar mais de 3 slides"
+            },
+            {
+                "id": "item-removed",
+                "text": "Item removido",
+                "type": "success",
+                "trigger": "Confirmação de remoção de item"
+            },
+            {
+                "id": "invalid-format",
+                "text": "Formato de arquivo não suportado. Use .jpg, .png ou .webp",
+                "type": "error",
+                "trigger": "Tentativa de upload com formato inválido"
+            },
+            {
+                "id": "image-load-error",
+                "text": "Erro ao carregar imagem",
+                "type": "error",
+                "trigger": "Falha no carregamento de imagem"
+            },
+            {
+                "id": "custom-mode-disabled",
+                "text": "Configurações publicadas com sucesso!",
+                "type": "success",
+                "trigger": "Alternância para modo automático"
+            },
+            {
+                "id": "settings-published",
+                "text": "Configurações publicadas com sucesso!",
+                "type": "success",
+                "trigger": "Publicação bem-sucedida"
+            }
+        ]
+    },
+    {
+        "section": "manual-mode",
+        "title": "Modo Manual de Configuração",
+        "description": "Interface para configuração personalizada do banner",
+        "acceptance_criteria": [
+            "Exibir quando modo manual estiver ativo",
+            "Campos de busca e programação obrigatórios",
+            "Suporte a conteúdo interno e externo",
+            "Validação de datas de ativação/desativação"
+        ],
+        "technical_notes": "Implementar validação de datas e campos obrigatórios. Manter estado do modo manual.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário ativa modo manual",
+                "2. Sistema mostra interface de configuração",
+                "3. Usuário busca conteúdo ou adiciona link",
+                "4. Usuário define datas de ativação/desativação",
+                "5. Usuário publica ou cancela alterações"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Componentes da Interface",
+                "description": "Elementos disponíveis no modo manual",
+                "details": [
+                    "Campo de busca para conteúdo interno (cursos, trilhas, eventos)",
+                    "Campo para adicionar links externos",
+                    "Datas de ativação e desativação do banner",
+                    "Botões de cancelar e publicar alterações",
+                    "Lista de itens adicionados com preview",
+                    "Indicadores de campos obrigatórios"
+                ]
+            },
+            {
+                "title": "Funcionalidades",
+                "description": "Capacidades do modo manual",
+                "details": [
+                    "Busca por título ou ID de conteúdo",
+                    "Suporte a links externos com imagem",
+                    "Programação de exibição do banner",
+                    "Preview dos itens adicionados",
+                    "Validação de datas e campos",
+                    "Limite de 3 itens por banner"
+                ]
+            },
+            {
+                "title": "Validações",
+                "description": "Regras de validação",
+                "details": [
+                    "Datas de ativação e desativação são obrigatórias",
+                    "Data de desativação deve ser posterior à ativação",
+                    "Máximo de 3 itens podem ser adicionados",
+                    "Links externos precisam de título e imagem",
+                    "Campos obrigatórios devem ser preenchidos",
+                    "Feedback visual para campos inválidos"
+                ]
+            },
+            {
+                "title": "Estados",
+                "description": "Estados possíveis da interface",
+                "details": [
+                    "Estado inicial: modo automático",
+                    "Estado de edição: modo manual ativo",
+                    "Estado com alterações não salvas",
+                    "Estado de validação de campos",
+                    "Estado de publicação em andamento",
+                    "Estado após publicação bem-sucedida"
+                ]
+            }
+        ]
+    },
+    {
+        "section": "programming-section",
+        "title": "Seção de Programação",
+        "description": "Campos para definir datas de ativação e desativação do banner",
+        "acceptance_criteria": [
+            "Datas de ativação e desativação são obrigatórias",
+            "Data de desativação deve ser posterior à ativação",
+            "Datas devem ser futuras",
+            "Feedback visual para datas inválidas"
+        ],
+        "technical_notes": "Usar input type='date' com validação de datas. Feedback visual com borda vermelha para datas inválidas.",
+        "interaction_flow": {
+            "steps": [
+                "1. Usuário clica no campo de data de ativação",
+                "2. Sistema mostra seletor de data",
+                "3. Usuário seleciona data de ativação",
+                "4. Usuário clica no campo de data de desativação",
+                "5. Sistema mostra seletor de data",
+                "6. Usuário seleciona data de desativação",
+                "7. Sistema valida as datas",
+                "8. Sistema mostra feedback visual se houver erro"
+            ]
+        },
+        "rules": [
+            {
+                "title": "Validação de Datas",
+                "description": "Regras para validação das datas de programação",
+                "details": [
+                    "Data de ativação não pode ser no passado",
+                    "Data de desativação deve ser posterior à ativação",
+                    "Ambas as datas são obrigatórias",
+                    "Feedback visual com borda vermelha para datas inválidas",
+                    "Mensagem de erro explicativa abaixo dos campos",
+                    "Botão de publicar fica desabilitado com datas inválidas"
+                ]
+            },
+            {
+                "title": "Interface",
+                "description": "Elementos visuais da seção de programação",
+                "details": [
+                    "Seção com borda e padding para agrupar os campos",
+                    "Ícone de calendário ao lado do título",
+                    "Campos de data com seletor nativo",
+                    "Mensagem de erro em vermelho abaixo dos campos",
+                    "Feedback visual imediato ao selecionar datas",
+                    "Layout responsivo em diferentes tamanhos de tela"
+                ]
+            }
+        ]
+    }
+]

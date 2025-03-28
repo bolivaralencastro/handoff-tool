@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konquest Banner Prototype</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;500;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Banner Principal -->
+        <div class="banner-container">
+            <div class="banner-content">
+                <h2 class="headline-small banner-title">Excelência no Atendimento ao Cliente: Técnicas para Encantar e Fidelizar.</h2>
+                <button class="button filled primary banner-action-button">
+                    <span class="material-icons-outlined">play_arrow</span>
+                    Ver mais
+                </button>
+            </div>
+
+            <button id="open-config-button" class="button icon-button surface banner-settings-button" aria-label="Configurar banner">
+                <span class="material-icons-outlined">settings</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Diálogo de Configuração -->
+    <div id="config-dialog" class="dialog hidden">
+        <div class="dialog-content">
+            <div class="dialog-text-content">
+                <h3 class="dialog-title">Configurações do Banner</h3>
+                <!-- Modo Section -->
+                <div class="mode-section">
+                    <div class="mode-icon-text">
+                        <span class="material-icons-outlined icon-auto" id="mode-icon">auto_awesome</span>
+                        <div>
+                            <p id="mode-label">Modo Automático</p>
+                            <p class="text-muted" id="mode-description">Cada usuário recebe conteúdos personalizados via IA.</p>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <!-- Manual Config Section -->
+                <div id="manual-config-section" class="hidden">
+                    <div class="addsection">
+                        <div class="add-item-container">
+                            <div class="text-field outlined with-internal-button">
+                                <input type="text" id="add-item-input" placeholder="Busque por cursos, trilhas e eventos ou cole um link externo" />
+                                <button class="button icon-button internal-action-button hidden" id="add-item-button">
+                                    <span class="material-icons-outlined">add</span>
+                                </button>
+                            </div>
+                            <div id="search-results-dropdown" class="search-dropdown hidden">
+                                <ul id="search-results-list"></ul>
+                            </div>
+                            <div id="external-details" class="search-dropdown hidden">
+                                <div class="external-details-form">
+                                    <div class="text-field outlined">
+                                        <input type="text" id="external-title-input" placeholder="Título *" />
+                                    </div>
+                                    <div class="text-field outlined file-input-container">
+                                        <input type="text" readonly placeholder="Imagem (1920x640px .jpg .png .webp) *" class="file-placeholder" onclick="document.getElementById('external-image-input').click()" />
+                                        <input type="file" id="external-image-input" accept=".jpg,.jpeg,.png,.webp" class="hidden" />
+                                        <button class="button icon-button internal-action-button" onclick="document.getElementById('external-image-input').click()">
+                                            <span class="material-icons-outlined">upload</span>
+                                        </button>
+                                        <div class="image-loader hidden">
+                                            <span class="material-icons-outlined rotating">sync</span>
+                                        </div>
+                                    </div>
+                                    <button id="confirm-add-external-button" class="button filled primary disabled" disabled>
+                                        Adicionar link externo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="added-items-list" class="item-list"></ul>
+                    </div>
+                    <div class="programming-section">
+                        <div class="label-programacao">
+                            <span class="material-icons-outlined icon-small">calendar_month</span>
+                            Programação
+                        </div>
+                        <div class="date-inputs">
+                            <div class="date-field">
+                                <label>Ativação *</label>
+                                <div class="text-field outlined date-input-wrapper">
+                                    <input type="date" id="start-date" />
+                                    <span class="material-icons-outlined date-icon">calendar_month</span>
+                                </div>
+                            </div>
+                            <div class="date-field">
+                                <label>Desativação *</label>
+                                <div class="text-field outlined date-input-wrapper">
+                                    <input type="date" id="end-date" />
+                                    <span class="material-icons-outlined date-icon">calendar_month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="date-error" class="text-error hidden">A data de desativação deve ser posterior à data de ativação</p>
+                    </div>
+                </div>
+                <!-- Auto Mode Actions -->
+                <div id="auto-mode-actions">
+                    <div class="auto-actions">
+                        <button id="close-auto-button" class="button text">Fechar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-actions" id="manual-mode-actions">
+                <button id="cancel-button" class="button text">Cancelar</button>
+                <button id="publish-button" class="button filled primary disabled" disabled>Publicar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toasts e Diálogos de Confirmação -->
+    <div id="toast-container"></div>
+
+    <div id="deactivation-confirm-dialog" class="dialog hidden">
+        <div class="dialog-content card">
+            <h3 class="headline-small">Confirmar desativação</h3>
+            <p class="body-medium">Deseja mesmo desativar o modo manual? Ao confirmar, todas as configurações serão apagadas e o banner retornará ao modo automático.</p>
+            <div class="dialog-actions">
+                <button id="cancel-deactivation" class="button text">Voltar</button>
+                <button id="confirm-deactivation" class="button text primary">Desativar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="unsaved-confirm-dialog" class="dialog hidden">
+        <div class="dialog-content card">
+            <h3 class="headline-small">Alterações não salvas</h3>
+            <p class="body-medium">Você tem alterações não salvas. Deseja continuar editando ou descartar as mudanças?</p>
+            <div class="dialog-actions">
+                <button id="discard-changes" class="button text primary">Descartar</button>
+                <button id="continue-editing" class="button text">Continuar Editando</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
